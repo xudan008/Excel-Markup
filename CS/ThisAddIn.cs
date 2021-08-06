@@ -25,10 +25,18 @@ namespace Markup
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+
+
+        public UserControl1 uc = new UserControl1();
+        public Microsoft.Office.Tools.CustomTaskPane ctp1;
+
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             e_application = this.Application;
             e_application.SheetSelectionChange += new Excel.AppEvents_SheetSelectionChangeEventHandler(e_Application_SheetSelectionChange);
+            ctp1 = Globals.ThisAddIn.CustomTaskPanes.Add(uc, "仪表辅助工具");
+            ctp1.Visible = true;
+            Globals.ThisAddIn.Application.SheetActivate += new Excel.AppEvents_SheetActivateEventHandler(uc.Application_SheetActivate);
         }
 
         /// <summary> 
